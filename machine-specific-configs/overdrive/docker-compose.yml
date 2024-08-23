@@ -10,8 +10,8 @@ filebeat:
     - elasticsearch
     - logstash
   environment:
-    - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    - KIBANA_HOST=http://kibana:5601
+    - ELASTICSEARCH_HOSTS=http://elk_host:9200
+    - KIBANA_HOST=http://elk_host:5601
   restart: unless-stopped
   # ⭐️ DEFINE ELK HOST HERE (remote hosts)
   extra_hosts:
@@ -31,8 +31,8 @@ metricbeat:
     - elasticsearch
     - kibana
   environment:
-    - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    - KIBANA_HOST=http://kibana:5601
+    - ELASTICSEARCH_HOSTS=http://elk_host:9200
+    - KIBANA_HOST=http://elk_host:5601
   restart: unless-stopped
   # ⭐️ DEFINE ELK HOST HERE (remote hosts)
   extra_hosts:
