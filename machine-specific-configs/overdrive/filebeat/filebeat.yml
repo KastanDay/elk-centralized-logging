@@ -1,11 +1,13 @@
 filebeat.inputs:
   - type: container
     paths:
-      - "/var/lib/docker/containers/*/*.log"
+      - "/var/lib/containers/storage/overlay-containers/*/*.log"
 
 processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~
   - add_docker_metadata:
-      host: "unix:///var/run/docker.sock"
+      host: "unix:///run/podman/podman.sock"
 
 output.logstash:
   hosts: ["elk_host:5044"]

@@ -5,9 +5,11 @@ services:
     image: docker.elastic.co/beats/filebeat:8.12.0
     user: root
     volumes:
-      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      # - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /home/kastanday/utils/elk-centralized-logging/machine-specific-configs/overdrive/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    # user: "${UID}:${GID}"
     command: ["--strict.perms=false"]
     depends_on:
       - elasticsearch
@@ -25,10 +27,12 @@ services:
     image: docker.elastic.co/beats/metricbeat:8.12.0
     user: root
     volumes:
-      - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      # - ./metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+      - /home/kastanday/utils/elk-centralized-logging/machine-specific-configs/overdrive/metricbeat/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # - /sys/class/nvidia-gpu:/sys/class/nvidia-gpu:ro
       - /usr/lib/nvidia:/usr/lib/nvidia:ro
+    # user: "${UID}:${GID}"
     command: ["--strict.perms=false"]
     depends_on:
       - elasticsearch
